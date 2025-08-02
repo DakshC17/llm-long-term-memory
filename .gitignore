@@ -1,0 +1,20 @@
+# Ignore virtual environment
+.venv/
+venv/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore environment variables or config files if you add them later
+.env
+.env.*
+
+# Ignore logs or local data files if you store conversations locally
+*.log
+*.db
+*.sqlite3
+
+# VSCode and other IDE files
+.vscode/
+.idea/
