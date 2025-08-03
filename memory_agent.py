@@ -1,24 +1,28 @@
+import os
+from dotenv import load_dotenv
+import google.generativeai as genai
 
-from memory_storage import add_memory, delete_memory, get_memories
+load_dotenv()
 
-def main():
-    print("Current memories:")
-    memories = get_memories()
-    print(memories)
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
-    print("\nAdding new memory: 'I use Shram and Magnet as productivity tools'")
-    add_memory("I use Shram and Magnet as productivity tools")
+def recall_with_gemini(memories, question):
+    """
+    Ask Gemini: what do I (the user) remember about X?
+    """
+    prompt = (
+        "Here are my memories:\n"
+        + "\n".join(f"- {m}" for m in memories) +
+        f"\n\nNow answer this question based on these memories:\n{question}"
+    )
 
-    print("\nUpdated memories:")
-    memories = get_memories()
-    print(memories)
-
-    print("\nDeleting memory containing 'Magnet'")
-    delete_memory("Magnet")
-
-    print("\nFinal memories:")
-    memories = get_memories()
-    print(memories)
+    response = model.generate_content(prompt)
+    return response.text
 
 if __name__ == "__main__":
-    main()
+    memories = ["I use Shram and Magnet as productivity tools"]
+    question = "What are the productivity tools that I use?"
+    answer = recall_with_gemini(memories, question)
+    print("\nAnswer from Gemini:")
+    print(answer)
