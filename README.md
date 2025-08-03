@@ -86,8 +86,8 @@ save_memories(memories)
 
 **Result:** Memories are saved to `memories.json`
 
-![Add memories]("output_images/Screenshot From 2025-08-03 11-39-53.png")
-![Add memories]("output_images/Screenshot From 2025-08-03 11-40-04.png")
+![Add memories](output_images/add1.png)
+![Add memories](output_images/add2.png)
 
 
 
@@ -105,8 +105,8 @@ print(answer)
 
 **Output:** "You use Shram and Magnet as productivity tools"
 
-![Recalled with Gemini]("output_images/Screenshot From 2025-08-03 11-43-15.png")
-![Recalled with Gemini]("output_images/Screenshot From 2025-08-03 11-42-56.png")
+![Recalled with Gemini](output_images/recall1.png)
+![Recalled with Gemini](output_images/recall2.png)
 
 
 ### Step 3: Delete Memories
@@ -120,8 +120,8 @@ save_memories(memories)
 
 **Result:** All memories containing "Magnet" are removed
 
-![memory Deletion]("output_images/Screenshot From 2025-08-03 11-43-41.png")
-![memory Deletion]("output_images/Screenshot From 2025-08-03 11-44-05.png")
+![memory Deletion](output_images/delete1.png)
+![memory Deletion](output_images/delete2.png)
 
 
 
