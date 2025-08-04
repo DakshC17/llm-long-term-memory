@@ -169,6 +169,11 @@ GEMINI_API_KEY=your_actual_api_key_here
 > **Note:** The `.env` file is not committed to version control for security reasons.
 
 
+## FURTHER IMPROVEMENTS
+1. Removing the json and fitting a vector database something like pinecone..
+2. LLM can remeber the things through embeddings and do semantic matching through the embeddings...
+
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
