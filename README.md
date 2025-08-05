@@ -174,6 +174,20 @@ GEMINI_API_KEY=your_actual_api_key_here
 2. LLM can remeber the things through embeddings and do semantic matching through the embeddings...
 
 
+## Workflow (Made by me)
+---> Tried to make RAG AI Agent earlier. Gave memory to LLM made it conversational Do check out....
+
+![RAG Memory workflow](output_images/Rag_memory_agent.png)
+
+1. Used Supabase for embedding storage
+2. Used LLM for Retrieval
+3. Used n8n
+
+## Linkedin URL(RAG AGENT)
+
+ --> [RAG Memory AI Agent Workflow](https://www.linkedin.com/posts/daksh-choudhary-18336b249_n8n-rag-automation-activity-7357441527003959297-2RIg?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD10pTMBrpyL0Ptk6GIYChMQGcmFlGdhhBE)
+
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
