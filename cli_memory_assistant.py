@@ -41,3 +41,44 @@ Return your response as a JSON object with keys:
 
 Input: "{user_input}"
 """
+    
+
+
+    
+    
+    
+    
+    response = model.generate_content(prompt)
+    try:
+        parsed = eval(response.text)  # Consider using json.loads() if using valid JSON
+        return parsed
+    except:
+        return { "intent": "ask_question" }
+
+while True:
+    user_input = input("You: ").strip()
+    
+    if user_input.lower() in ["exit", "quit"]:
+        print("Goodbye!")
+        break
+
+    classification = classify_input(user_input)
+    intent = classification.get("intent")
+
+    if intent == "add_memory":
+        memory = classification.get("memory", user_input)
+        add_memory(memory)
+        print(f"Memory saved: \"{memory}\"")
+
+    elif intent == "delete_memory":
+        keyword = classification.get("keyword", "")
+        delete_memory(keyword)
+        print(f"Memory containing '{keyword}' deleted!")
+
+    elif intent == "ask_question":
+        memories = get_memories()
+        response = recall_with_gemini(memories, user_input)
+        print(f"{response}")
+    
+    else:
+        print("Could not classify input. Please try again.")
