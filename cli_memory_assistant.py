@@ -24,3 +24,20 @@ Return your response as a JSON object with keys:
 - "intent": one of the 3 categories
 - "memory" (optional): string to save if intent is add_memory
 - "keyword" (optional): string keyword to delete if intent is delete_memory)"""
+
+
+def classify_input(user_input):
+    """Use LLM to classify input as memory, question, or deletion"""
+    model = genai.GenerativeModel("gemini-1.5-flash-latest")
+    
+    prompt = f"""
+You are an input classifier. Classify the following user input into one of three categories: ["add_memory", "ask_question", "delete_memory"].
+Also extract a 'keyword' if it helps with deletion, or a clean memory string if adding.
+
+Return your response as a JSON object with keys:
+- "intent": one of the 3 categories
+- "memory" (optional): string to save if intent is add_memory
+- "keyword" (optional): string keyword to delete if intent is delete_memory
+
+Input: "{user_input}"
+"""
