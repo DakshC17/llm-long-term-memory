@@ -28,7 +28,9 @@ Return your response as a JSON object with keys:
 
 def classify_input(user_input):
     """Use LLM to classify input as memory, question, or deletion"""
-    model = genai.GenerativeModel("gemini-1.5-flash-latest")
+    model = genai.GenerativeModel("gemini-1.5-flash-latest")   ##we will change the model for faster replies
+                                                                # can also switch to local ollama or transformers model
+                                                                
     
     prompt = f"""
 You are an input classifier. Classify the following user input into one of three categories: ["add_memory", "ask_question", "delete_memory"].
