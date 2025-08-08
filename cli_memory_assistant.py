@@ -17,13 +17,13 @@ print("---------------- Type your messages below. Type 'exit' to quit.\n--------
 
 
 
-""" prompt (testing it for now ---> You are an input classifier. Classify the following user input into one of three categories: ["add_memory", "ask_question", "delete_memory"].
-Also extract a 'keyword' if it helps with deletion, or a clean memory string if adding.
+# """ prompt (testing it for now ---> You are an input classifier. Classify the following user input into one of three categories: ["add_memory", "ask_question", "delete_memory"].
+# Also extract a 'keyword' if it helps with deletion, or a clean memory string if adding.
 
-Return your response as a JSON object with keys:
-- "intent": one of the 3 categories
-- "memory" (optional): string to save if intent is add_memory
-- "keyword" (optional): string keyword to delete if intent is delete_memory)"""
+# Return your response as a JSON object with keys:
+# - "intent": one of the 3 categories
+# - "memory" (optional): string to save if intent is add_memory
+# - "keyword" (optional): string keyword to delete if intent is delete_memory)"""
 
 
 def classify_input(user_input):
@@ -33,13 +33,25 @@ def classify_input(user_input):
                                                                 
     
     prompt = f"""
-You are an input classifier. Classify the following user input into one of three categories: ["add_memory", "ask_question", "delete_memory"].
-Also extract a 'keyword' if it helps with deletion, or a clean memory string if adding.
+You are an intelligent input classifier for a Long-Term Memory CLI Assistant.  
+Your task is to carefully read the user's input and classify it into one of the following intent categories:  
+1. "add_memory" → The user is providing personal or contextual information to be stored for future reference.  
+2. "ask_question" → The user is asking a question or requesting information without intending to store or delete memory.  
+3. "delete_memory" → The user wants to remove previously stored memory, either entirely or related to a specific keyword.
 
-Return your response as a JSON object with keys:
-- "intent": one of the 3 categories
-- "memory" (optional): string to save if intent is add_memory
-- "keyword" (optional): string keyword to delete if intent is delete_memory
+Rules & Requirements:
+- If intent is "add_memory", extract the exact, clean statement the user wants stored, removing filler words like "remember that" or "my". Store this in the "memory" field.  
+- If intent is "delete_memory", extract the relevant keyword or phrase to help identify the memory to delete. Store this in the "keyword" field. If the user requests deleting all memories, return "all" as the keyword.  
+- If intent is "ask_question", do not return "memory" or "keyword".  
+- Always classify based on the core meaning, even if phrased indirectly or conversationally.  
+- Ignore polite phrases, greetings, or irrelevant text when extracting memory or keyword.
+
+Return the result strictly in JSON format with the following structure:
+{
+  "intent": "<add_memory | ask_question | delete_memory>",
+  "memory": "<string>",       // Only if intent is add_memory
+  "keyword": "<string>"       // Only if intent is delete_memory
+}
 
 Input: "{user_input}"
 """
