@@ -24,8 +24,9 @@ Rules:
 - For "add_memory", extract only the clean memory text (no "remember that").
 - For "delete_memory", extract keyword or "all".
 - For "ask_question", no memory/keyword fields.
-- Respond ONLY with a valid JSON object and nothing else.
-- Do not include explanations, extra text, or formatting outside the JSON.
+- Respond ONLY with a valid JSON object matching:
+  {{"intent": "<add_memory|ask_question|delete_memory>", "memory": "<string>", "keyword": "<string>"}}
+- Do not include any code fences, markdown, or extra text.
 
 Example:
 {{"intent": "add_memory", "memory": "I like pizza"}}
@@ -33,19 +34,41 @@ Example:
 Input: "{user_input}"
 """
 
-    for attempt in range(2):  # Try twice before defaulting
+    for attempt in range(2):
         response = model.generate_content(prompt)
         raw_text = response.candidates[0].content.parts[0].text.strip()
-        print(f"[DEBUG] Raw classification output: {raw_text}")  # Debugging
+        print(f"[DEBUG] Raw classification output: {raw_text}")
+
+        # Remove code fences if present
+        if raw_text.startswith("```"):
+            raw_text = raw_text.strip("`").replace("json", "", 1).strip()
 
         try:
-            return json.loads(raw_text)
+            parsed = json.loads(raw_text)
+            if "intent" in parsed:  # Make sure schema is correct
+                return parsed
         except json.JSONDecodeError:
-            if attempt == 0:
-                prompt = f"Return ONLY valid JSON for this input: {user_input}"
-                continue
+            pass
+
+        # Retry with stricter instruction
+        prompt = f"Return ONLY valid JSON in the schema: intent, memory (optional), keyword (optional) for: {user_input}"
 
     return {"intent": "ask_question"}
+
+
+def recall_with_gemini(memories, question):
+    """Ask Gemini a question using stored memories."""
+    if not memories:
+        return "I don't remember anything yet."
+
+    prompt = (
+        "Here are my memories:\n"
+        + "\n".join(f"- {m}" for m in memories)
+        + f"\n\nNow answer this question based ONLY on these memories:\n{question}"
+    )
+    response = model.generate_content(prompt)
+    return response.text
+
 
 
 print("\n---------------- Welcome to LLM Long-Term Memory CLI Assistant --------------------")
