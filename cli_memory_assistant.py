@@ -31,15 +31,22 @@ Example:
 {{"intent": "add_memory", "memory": "I like pizza"}}
 
 Input: "{user_input}"
-    """
+"""
 
-    response = model.generate_content(prompt)
-    try:
-        # Use safer extraction
-        text = response.candidates[0].content.parts[0].text.strip()
-        return json.loads(text)
-    except Exception:
-        return {"intent": "ask_question"}
+    for attempt in range(2):  # Try twice before defaulting
+        response = model.generate_content(prompt)
+        raw_text = response.candidates[0].content.parts[0].text.strip()
+        print(f"[DEBUG] Raw classification output: {raw_text}")  # Debugging
+
+        try:
+            return json.loads(raw_text)
+        except json.JSONDecodeError:
+            if attempt == 0:
+                prompt = f"Return ONLY valid JSON for this input: {user_input}"
+                continue
+
+    return {"intent": "ask_question"}
+
 
 print("\n---------------- Welcome to LLM Long-Term Memory CLI Assistant --------------------")
 print("Type 'exit' to quit.\n")
