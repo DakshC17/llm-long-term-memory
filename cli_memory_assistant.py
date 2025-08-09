@@ -1,5 +1,3 @@
-
-
 import os
 import json
 from dotenv import load_dotenv
@@ -7,10 +5,8 @@ import google.generativeai as genai
 from memory_storage import add_memory, get_memories, delete_memory
 from memory_agent import recall_with_gemini
 
-
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-
 
 model = genai.GenerativeModel("gemini-1.5-flash-latest")
 
@@ -28,19 +24,21 @@ Rules:
 - For "add_memory", extract only the clean memory text (no "remember that").
 - For "delete_memory", extract keyword or "all".
 - For "ask_question", no memory/keyword fields.
-- Respond ONLY in valid JSON, nothing else.
+- Respond ONLY with a valid JSON object and nothing else.
+- Do not include explanations, extra text, or formatting outside the JSON.
 
 Example:
 {{"intent": "add_memory", "memory": "I like pizza"}}
 
 Input: "{user_input}"
     """
-    response = model.generate_content(prompt)
-    text = response.text.strip()
 
+    response = model.generate_content(prompt)
     try:
+        # Use safer extraction
+        text = response.candidates[0].content.parts[0].text.strip()
         return json.loads(text)
-    except json.JSONDecodeError:
+    except Exception:
         return {"intent": "ask_question"}
 
 print("\n---------------- Welcome to LLM Long-Term Memory CLI Assistant --------------------")
@@ -58,16 +56,16 @@ while True:
     if intent == "add_memory":
         memory = classification.get("memory", user_input)
         add_memory(memory)
-        print(f"Memory saved: \"{memory}\"")
+        print(f"💾 Memory saved: \"{memory}\"")
 
     elif intent == "delete_memory":
         keyword = classification.get("keyword", "")
         if keyword.lower() == "all":
             delete_memory("")  
-            print("All memories deleted!")
+            print("🗑 All memories deleted!")
         else:
             delete_memory(keyword)
-            print(f" Memories containing '{keyword}' deleted.")
+            print(f"🗑 Memories containing '{keyword}' deleted.")
 
     elif intent == "ask_question":
         memories = get_memories()
@@ -75,4 +73,4 @@ while True:
         print(f"🤖 {answer}")
 
     else:
-        print("Could not classify input. Please try again.")
+        print("⚠️ Could not classify input. Please try again.")
