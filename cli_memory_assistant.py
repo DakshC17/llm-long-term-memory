@@ -74,3 +74,7 @@ while True:
 
     else:
         print("Could not classify input. Please try again.")
+
+
+
+#need to work on the optimisation of the cli
