@@ -174,7 +174,7 @@ GEMINI_API_KEY=your_actual_api_key_here
 2. LLM can remeber the things through embeddings and do semantic matching through the embeddings...
 
 
-## Workflow (Made by me)
+## Workflow
 ---> Tried to make RAG AI Agent earlier. Gave memory to LLM made it conversational Do check out....
 
 ![RAG Memory workflow](output_images/Rag_memory_agent.png)
