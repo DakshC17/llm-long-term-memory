@@ -4,7 +4,6 @@ import json
 import os
 
 MEMORY_FILE = "memory.json"
-#Initialise locsal memory system as a json
 def load_memories():
     if os.path.exists(MEMORY_FILE):
         with open(MEMORY_FILE, "r") as f:
