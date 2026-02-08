@@ -15,6 +15,7 @@ def load_memories():
 def save_memories(memories):
     with open(MEMORY_FILE, "w") as f:
         json.dump(memories, f, indent=2)
+        
 def add_memory(memory_text):
     memories = load_memories()
     memories.append(memory_text)
