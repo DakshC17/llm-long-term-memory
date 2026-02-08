@@ -22,6 +22,7 @@ def add_memory(memory_text):
     save_memories(memories)
 def get_memories():
     return load_memories()
+    
 def delete_memory(keyword):
     memories = load_memories()
     updated = [m for m in memories if keyword not in m]
