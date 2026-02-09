@@ -2,9 +2,6 @@ import json
 import os
 MEMORY_FILE = "memory.json"
 
-
-
-#could shift from json to db
 def load_memories():
     if os.path.exists(MEMORY_FILE):
         with open(MEMORY_FILE, "r") as f:
