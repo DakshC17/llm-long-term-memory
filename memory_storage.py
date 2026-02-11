@@ -8,7 +8,6 @@ def load_memories():
             return json.load(f)
     return []
 
-##simple storing is all we are doing now
 def save_memories(memories):
     with open(MEMORY_FILE, "w") as f:
         json.dump(memories, f, indent=2)
