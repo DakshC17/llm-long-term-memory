@@ -5,6 +5,8 @@ import google.generativeai as genai
 from memory_storage import add_memory, get_memories, delete_memory
 from memory_agent import recall_with_gemini
 
+#Improvement identifies : PROMPT ENHANCEment
+
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
