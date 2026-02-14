@@ -37,10 +37,10 @@ def delete_memory(memories, keyword):
 
 if __name__ == "__main__":
     
-    memories = [
-        "I use Shram and Magnet as productivity tools",
-        "I work as a Machine Learning Engineer at Shram AI"
-    ]
+    # memories = [
+    #     "I use Shram and Magnet as productivity tools",
+    #     "I work as a Machine Learning Engineer at Shram AI"
+    # ]
     print("Initial memories:")
     print(memories)
     save_memories(memories)
