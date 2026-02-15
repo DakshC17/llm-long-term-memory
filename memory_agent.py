@@ -41,10 +41,13 @@ if __name__ == "__main__":
     #     "I use Shram and Magnet as productivity tools",
     #     "I work as a Machine Learning Engineer at Shram AI"
     # ]
-    print("Initial memories:")
-    print(memories)
-    save_memories(memories)
-    print("Memories saved to JSON.")
+    # print("Initial memories:")
+    # print(memories)
+    # save_memories(memories)
+    # print("Memories saved to JSON.")
+
+
+    #even trying with some other additional memories
 
     
     question = "What are the productivity tools that I use?"
