@@ -7,8 +7,7 @@ from memory_agent import recall_with_gemini
 
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-
-model = genai.GenerativeModel("gemini-1.5-flash-latest")
+model = genai.GenerativeModel("gemini-2.5-flash-latest")
 
 def classify_input(user_input):
     """Classify user input as add_memory, ask_question, or delete_memory"""
