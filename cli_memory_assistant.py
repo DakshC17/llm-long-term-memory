@@ -18,12 +18,12 @@ Classify the user's input into one of:
 2. "ask_question" → The user is asking something without storing or deleting.
 3. "delete_memory" → The user wants to delete memory (keyword or all).
 
-# Rules:
-# - For "add_memory", extract only the clean memory text (no "remember that").
-# - For "delete_memory", extract keyword or "all".
-# - For "ask_question", no memory/keyword fields.
-# - Respond ONLY with a valid JSON object and nothing else.
-# - Do not include explanations, extra text, or formatting outside the JSON.
+Rules:
+- For "add_memory", extract only the clean memory text (no "remember that").
+- For "delete_memory", extract keyword or "all".
+- For "ask_question", no memory/keyword fields.
+- Respond ONLY with a valid JSON object and nothing else.
+- Do not include explanations, extra text, or formatting outside the JSON.
 
 ###new rules will be added
 
