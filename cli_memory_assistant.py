@@ -25,7 +25,7 @@ Rules:
 - Respond ONLY with a valid JSON object and nothing else.
 - Do not include explanations, extra text, or formatting outside the JSON.
 
-# ###new rules will be added
+
 
 Example:
 {{"intent": "add_memory", "memory": "I like pizza"}}
