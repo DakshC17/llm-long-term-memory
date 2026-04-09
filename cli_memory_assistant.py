@@ -31,7 +31,7 @@ Example:
 {{"intent": "add_memory", "memory": "I like pizza"}}
 
 Input: "{user_input}"
-    """
+    ""
 
     response = model.generate_content(prompt)
     try:
