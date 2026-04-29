@@ -5,7 +5,6 @@ import google.generativeai as genai
 # need to try the open ai sdk
 load_dotenv()
 genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
-
 model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
 MEMORY_FILE = "memories.json"
