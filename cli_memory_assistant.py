@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import google.generativeai as genai
 from memory_storage import add_memory, get_memories, delete_memory
 from memory_agent import recall_with_gemini
-
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-2.5-flash-latest")
